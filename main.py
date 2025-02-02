@@ -72,7 +72,7 @@ class WeatherApp(QWidget):
 
         self.get_answer.clicked.connect(self.get_weather) #This triggers the get_weather line of code once the calculate button is clicked.
     
-    def get_weather(self):
+    def get_weather(self): #This block of code helps me get the right data.
 
         api_key = "2184ce7296d0acd0d4643154f105f8f6"
         city = self.city_input.text()
@@ -85,7 +85,7 @@ class WeatherApp(QWidget):
 
            if data["cod"] == 200:
               self.display_weather(data)
-        except requests.exceptions.HTTPError:
+        except requests.exceptions.HTTPError: #This block of code is used for defining the type of errors an individual can stumble upon whilst calculating the weather.
            match response.status_code:
                case 400:
                     self.display_error("Bad Request\nPlease check your input!")
@@ -113,7 +113,7 @@ class WeatherApp(QWidget):
         self.temperature_label.setStyleSheet("font-size: 30px;")
         self.temperature_label.setText(message)
 
-    def display_weather(self, data):
+    def display_weather(self, data): #This block of code calculates the temperature from kalvin to celsius and fahrenheit and displays the two units without the decimals.
         self.temperature_label.setStyleSheet("font-size: 30px;")
         temperature_k = data["main"]["temp"]
         temperature_c = temperature_k - 273.15
